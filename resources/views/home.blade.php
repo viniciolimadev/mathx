@@ -28,7 +28,7 @@
     <form action="{{ route('generateExercise')}}" method="post">
 
         @csrf
-        
+
         <div class="container border border-primary rounded-3 p-5">
 
             <div class="row gap-5">
@@ -66,7 +66,7 @@
                 <!-- parcelas -->
                 <div class="col">
 
-                    <p class="text-info">Parcelas:</p>
+                    <p class="text-info">Intervalo de numeros:</p>
 
                     <div class="mb-3">
                         <label for="number_one">Mínimo:</label>
@@ -104,10 +104,20 @@
         </div>
 
     </form>
+    {{-- erro de validação --}}
+    @if($errors->any())
+    <div class="container">
+        <div class="row">
+            <div class="alert alert-danger text-center mt-3">
+             Por favor selecione pelo monos uma operação. O intervalo de numeros deve ser entre 5 e 50.
+            </div>
+        </div>
+    </div>
+    @endif
 
     <!-- footer -->
     <footer class="text-center mt-5">
-        <p class="text-secondary">MathX &copy; <span class="text-info">[ANO]</span></p>
+        <p class="text-secondary">MathX &copy; <span class="text-info">{{date("Y")}}</span></p>
     </footer>
 
     <!-- bootstrap -->
