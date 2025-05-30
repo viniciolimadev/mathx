@@ -34,7 +34,7 @@ class MainController extends Controller
        if($request->check_division){ $operations[] = 'division';}
 
         $min = $request->number_one;
-        $max = $request->number_one;
+        $max = $request->number_two;
 
         $numberExercises = $request->number_exercises;
 
@@ -49,9 +49,24 @@ class MainController extends Controller
     }
 
     public function printExercises(){
-
-        echo 'apresentar exercicios';
+        if(!session()->has('exercises')){
+            return redirect()->route('home');
+        }
         
+        $exercises = session('exercises');
+        echo '<pre>';
+        echo '<h1> Exercícios de Matemática(' . env('APP_NAME') . ') </h1>';
+        echo '<hr>';
+
+        foreach ($exercises as $exercise) {
+           echo '<h2><small>' . str_pad($exercise['exercise_number'], 2, "0", STR_PAD_LEFT) . ' >> </small> ' . $exercise['exercise'] . '</h2>';
+        }
+        echo '<hr>';
+        echo '<small>Soluções</small><br>';
+        foreach ($exercises as $exercise) {
+           echo '<h2><small>' . str_pad($exercise['exercise_number'], 2, "0", STR_PAD_LEFT) . ' >> </small> ' . $exercise['sollution'] . '</h2>';
+        }
+
     }
     public function exportExercises(){
 
@@ -100,7 +115,7 @@ class MainController extends Controller
                 'operstion' => $operation,
                 'exercise_number' => $index,
                 'exercise' => $exercise,
-                'solution' => "$exercise $sollution"
+                'sollution' => "$exercise $sollution"
             ];
         
         
