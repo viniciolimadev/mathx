@@ -39,25 +39,25 @@
                     <p class="text-info">Operações:</p>
 
                     <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="check_sum" name="check_sum" checked>
+                        <input class="form-check-input" type="checkbox" id="check_sum" name="check_sum" >
                         <label class="form-check-label" for="check_sum">Soma</label>
                     </div>
 
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" id="check_subtraction" name="check_subtraction"
-                            checked>
+                            >
                         <label class="form-check-label" for="check_subtraction">Subtração</label>
                     </div>
 
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" id="check_multiplication"
-                            name="check_multiplication" checked>
+                            name="check_multiplication" >
                         <label class="form-check-label" for="check_multiplication">Multiplicação</label>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="check_division" name="check_division"
-                            checked>
+                            >
                         <label class="form-check-label" for="check_division">Divisão</label>
                     </div>
 

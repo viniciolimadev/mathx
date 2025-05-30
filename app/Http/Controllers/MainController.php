@@ -12,14 +12,14 @@ class MainController extends Controller
         return view('home');
         
     }
-    public function generateExercise(Request $request){
+    public function generateExercises(Request $request){
 
         //form validate
         $request->validate([
-            'check_sum' => 'required_without_all::check_subtraction,check_multiplication,check_division',
-            'check_subtraction' => 'required_without_all::check_sum,check_multiplication,check_division',
-            'check_multiplication' => 'required_without_all::check_sum,check_subtraction,check_division',
-            'check_division' => 'required_without_all::check_sum,check_subtraction,check_multiplication',
+            'check_sum' => 'required_without_all::check_sum,check_subtraction,check_multiplication,check_division',
+            'check_subtraction' => 'required_without_all::check_subtraction,check_sum,check_multiplication,check_division',
+            'check_multiplication' => 'required_without_all::check_multiplication,check_sum,check_subtraction,check_division',
+            'check_division' => 'required_without_all::check_division,check_sum,check_subtraction,check_multiplication',
 
             'number_one' => 'required|integer|min:0|max:999',
             'number_two' => 'required|integer|min:0|max:999',
@@ -40,8 +40,28 @@ class MainController extends Controller
 
         $exercises =[];
         for ($index=1; $index <= $numberExercises ; $index++) { 
-            
-            $operation = $operations[array_rand($operations)];
+            $exercises [] = $this->generateExercise($index,$operations,$min,$max);
+        }
+
+        session(['exercises' => $exercises]);
+        
+        return view('operations', ['exercises' => $exercises]);
+    }
+
+    public function printExercises(){
+
+        echo 'apresentar exercicios';
+        
+    }
+    public function exportExercises(){
+
+        echo 'gerar exercicios';
+        
+    }
+
+    private function generateExercise($index,$operations,$min,$max):array{
+
+        $operation = $operations[array_rand($operations)];
             $number1 = rand($min,$max);
             $number2 = rand($min,$max);
 
@@ -76,25 +96,14 @@ class MainController extends Controller
                $sollution = round($sollution, 2);
             }
 
-            $exercises[] = [
+            return [
                 'operstion' => $operation,
                 'exercise_number' => $index,
                 'exercise' => $exercise,
                 'solution' => "$exercise $sollution"
             ];
-        }
         
-
-    }
-
-    public function printExercise(){
-
-        echo 'apresentar exercicios';
         
-    }
-    public function exportExercises(){
-
-        echo 'gerar exercicios';
-        
+       
     }
 }
